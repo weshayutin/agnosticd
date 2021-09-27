@@ -18,17 +18,17 @@
     - install_infra_ssh_key | default(false) | bool
 
   - name: Get fact for cloudformation stack
-    cloudformation_facts:
+    cloudformation_info:
       stack_name: "{{ project_tag }}"
     register: stack_facts
 
   - name: Grab and set stack creation_time
-    when: project_tag in stack_facts.ansible_facts.cloudformation
+    when: project_tag in stack_facts.cloudformation
     set_fact:
       stack_creation_time: >-
-        {{ stack_facts.ansible_facts.cloudformation[project_tag].stack_description.creation_time }}
+        {{ stack_facts.cloudformation[project_tag].stack_description.creation_time }}
       stack_status: >-
-        {{ stack_facts.ansible_facts.cloudformation[project_tag].stack_description.stack_status }}
+        {{ stack_facts.cloudformation[project_tag].stack_description.stack_status }}
 
   - name: Run infra-ec2-create-inventory role
     include_role:
