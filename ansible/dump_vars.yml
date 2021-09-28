@@ -1,0 +1,11 @@
+---
+# read in all the ansible vars and dump them to a file
+# per step for debug
+- name: dump all ansible vars to file
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  become: false
+  tags: dump_vars
+  roles:
+    - dump_vars

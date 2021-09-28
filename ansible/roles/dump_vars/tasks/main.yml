@@ -1,0 +1,6 @@
+---
+# tasks file for dump_vars
+- name: dump all ansible vars to /tmp/all_agnostic_vars.log
+  template:
+    src: dump_all_vars.j2
+    dest: "/tmp/{{ step }}_agnosticd_vars.log"
